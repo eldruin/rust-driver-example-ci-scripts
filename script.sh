@@ -2,10 +2,6 @@ set -exo pipefail
 
 main() {
     export CARGO_OPTIONS="$CARGO_OPTIONS --target $TARGET"
-    if [[ ! $TARGET =~ .*linux.* ]]; then
-        sed -i "s/linux-embedded-hal/#linux-embedded-hal/g" Cargo.toml
-        sed -i "s/embedded-hal-mock/#embedded-hal-mock/g" Cargo.toml
-    fi
 
     if [ ! -z $FEATURES ]; then
        export CARGO_OPTIONS="$CARGO_OPTIONS --features $FEATURES"
