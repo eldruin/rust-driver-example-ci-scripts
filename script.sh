@@ -7,10 +7,18 @@ main() {
        export CARGO_OPTIONS="$CARGO_OPTIONS --features $FEATURES"
     fi
 
-    for EXAMPLE in $EXAMPLES;
-    do
-        cargo build $CARGO_OPTIONS --example $EXAMPLE
-    done
+    if [ ! -z "$EXAMPLES" ]; then
+        for EXAMPLE in $EXAMPLES;
+        do
+            cargo build $CARGO_OPTIONS --example $EXAMPLE
+        done
+    else
+        # if no explicit list was provided, build all
+        for filename in examples/*.rs;
+        do
+            cargo build $CARGO_OPTIONS --example $(basename "$filename" .rs)
+        done
+    fi
 
     cargo doc $CARGO_OPTIONS
 
