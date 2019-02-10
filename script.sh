@@ -13,11 +13,7 @@ main() {
             cargo build $CARGO_OPTIONS --example $EXAMPLE
         done
     else
-        # if no explicit list was provided, build all
-        for filename in examples/*.rs;
-        do
-            cargo build $CARGO_OPTIONS --example $(basename "$filename" .rs)
-        done
+        cargo build $CARGO_OPTIONS --examples
     fi
 
     cargo doc $CARGO_OPTIONS
