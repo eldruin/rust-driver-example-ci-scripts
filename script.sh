@@ -1,6 +1,9 @@
 set -exo pipefail
 
 main() {
+    if [ ! -z "$SUBFOLDER" ]; then
+        cd "$SUBFOLDER"
+    fi
 
     if [ ! -z "$GIT_DRIVERS" ]; then
         for DRIVER in $GIT_DRIVERS;
